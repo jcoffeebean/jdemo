@@ -1,0 +1,24 @@
+1.webAppName/WEB-INF目录结构和文件说明：
+		classes - 该目录下存放编译好的class文件
+		lib - 该目录下存放第三方依赖的jar包
+		*.tld - 自定义标签库文件
+		web.xml 
+
+2.webAppName/WEB-INF/classes目录结构和文件说明：
+		该目录下存放编译好的class文件、国际化资源文件、xml配置文件、以及其他配置文件；
+		eg：com/**/*/*.class
+			xml/map/*-map.xml
+			xml/struts/struts-*.xml
+			xml/context/appContext-*.xml
+			mybatis-config.xml
+			quartz.properties
+			resources_zh_CN.properties
+			struts.xml
+			log4j.properties
+			pagestyle.xml
+			ehcache.xml
+			config.properties
+			
+3.jsp、js和css文件和目录直接存放在	webAppName应用的根路径下面；
+
+	

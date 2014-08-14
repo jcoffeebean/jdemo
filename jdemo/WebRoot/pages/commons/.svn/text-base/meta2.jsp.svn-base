@@ -1,0 +1,11 @@
+ 	<%@ page pageEncoding="UTF-8"%>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="${ctx }/resource/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="${ctx }/resource/css/main.css">
+    <script type="text/javascript" src="${ctx }/resource/js/base.js"></script>
+    <script type="text/javascript" src="${ctx }/resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="${ctx }/resource/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="${ctx }/resource/js/page.js"></script>
+    <script type="text/javascript">
+    var ctx = '${ctx}';
+	</script>

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/video/!svn/ver/116/trunk/video/WebRoot/WEB-INF/pages/commons
+END
+taglibs.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/video/!svn/ver/63/trunk/video/WebRoot/WEB-INF/pages/commons/taglibs.jsp
+END
+meta.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/video/!svn/ver/106/trunk/video/WebRoot/WEB-INF/pages/commons/meta.jsp
+END
+404.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/video/!svn/ver/7/trunk/video/WebRoot/WEB-INF/pages/commons/404.jsp
+END
+foot.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/video/!svn/ver/106/trunk/video/WebRoot/WEB-INF/pages/commons/foot.jsp
+END
+meta2.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/video/!svn/ver/63/trunk/video/WebRoot/WEB-INF/pages/commons/meta2.jsp
+END
+login.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/video/!svn/ver/116/trunk/video/WebRoot/WEB-INF/pages/commons/login.jsp
+END
+error.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/video/!svn/ver/100/trunk/video/WebRoot/WEB-INF/pages/commons/error.jsp
+END
+head.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/video/!svn/ver/106/trunk/video/WebRoot/WEB-INF/pages/commons/head.jsp
+END

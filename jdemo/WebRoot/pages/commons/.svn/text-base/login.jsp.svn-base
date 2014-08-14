@@ -1,0 +1,80 @@
+<%@ page contentType="text/html;charset=UTF-8" import="com.hzgk.common.GlobalConstants"%>
+<%@ include file="/WEB-INF/pages/commons/taglibs.jsp" %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>视频监控系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <link rel="stylesheet" type="text/css" href="${ctx }/resource/bootstrap/css/bootstrap.css">
+   	<link rel="stylesheet" type="text/css" href="${ctx }/resource/bootstrap/css/unicorn.login.css">
+	<script type="text/javascript">
+		function checkNull()
+		{
+			var str="";
+			var num = 1;
+	        if($("#jybh").val()=="" || $("#passwd").val()=="")
+	        {
+	        	str += $("#jybh").attr("msg")+"用户名和密码不能为空！\r\n";
+	        	num = 0;
+	        }
+	        
+		    if(num==0)
+		    {	
+		    	  
+		          alert(str);
+		          return false;
+		    } 
+		    else
+		    {
+		    	return true;
+		    }
+		}
+	
+	</script>
+  </head>
+  
+    <body>
+        <div id="logo" style="width:64;height:64;">
+            <img src="${ctx}/resource/bootstrap/img/logo.png" />
+        </div>
+        <div id="loginbox">            
+            <form id="loginform" action="${ctx}/yh/login" class="form-vertical" />
+				<p>视频登录系统.</p>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="input-prepend">
+                        	<span class="add-on">用户名<i class="icon-user"></i></span>
+                        	<input id="jybh" name="jybh" type="text" msg="用户名"/>
+                        	<span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="input-prepend">
+                            <span class="add-on">密&nbsp;&nbsp;&nbsp;码<i class="icon-lock"></i></span>
+                            <input id="passwd" name="passwd" type="password" msg="密码"/>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">                
+                    <span class="pull-right"><input type="submit" onclick="return checkNull()" class="btn btn-inverse" value="登    录" /></span>
+					<span>
+	                    <c:if test="${requestScope.message!=null}">
+							<font color="#DB7093">${requestScope.message}</font>
+	　　					</c:if>
+					</span>
+                </div>
+                <div>
+                </div>
+            </form>           
+        </div>
+        <script src="${ctx}/resource/bootstrap/js/jquery.min.js"></script>  
+        <script src="${ctx}/resource/bootstrap/js/unicorn.login.js"></script> 
+    </body>
+</html>

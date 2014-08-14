@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="demo" default="tomcatinstall" basedir=".">
+	
+	<!--============================================================
+	==== 设置项目相关的属性
+	==============================================================-->
+	
+	<property name="app.name" value="jdemo" />	
+	<property name="app.home" value="." />
+	
+	<property name="src.java" value="${app.home}/java" />
+	<property name="src.properties" value="${app.home}/properties" />
+	<property name="src.tlds" value="${app.home}/tlds" />
+	<property name="src.lib" value="${app.home}/lib" />
+	<property name="src.jsp" value="${app.home}/docroot/jsp" />
+	<property name="src.xml" value="${app.home}/xml" />
+	
+	<property name="build" value="${app.home}/build" />
+	<property name="build.classes" value="${app.home}/build/classes" />
+	<property name="build.web" value="${app.home}/build/web" />
+	<property name="build.debug" value="true" />	
+	<property name="build.debuglevel" value="lines,vars,source" />	
+	
+	<property name="deploy.dir" value="D:/tomcat6.0/webapps" />
+	<property name="deploy.appDir" value="D:/tomcat6.0/webapps/${app.name}" />
+	
+
+		
+	<!--============================================================
+	==== 设置时间变量
+	==============================================================-->
+	<tstamp>
+		<format property="sysdate" pattern="yyyyMMddHHmm" locale="zh_CN"/>
+	</tstamp>
+		
+	<!--============================================================
+	==== 设置classpath
+	==============================================================-->
+	<path id="compile.classpath">
+		<pathelement location="${build.classes}"/>
+		<fileset dir="${src.lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	<!--============================================================
+	==== 清理
+	==============================================================-->	
+	<target name="clean_all">
+		<delete dir="${build}" />
+		<delete dir="${deploy.dir}" />
+	</target>
+
+	
+	<target name="clean_build">
+		<delete dir="${build}" />
+	</target>
+	
+	
+	<!--============================================================
+	==== 编译
+	==============================================================-->	
+	<target name="compile" description="编译项目代码"> 
+		<mkdir dir="${build.classes}" />
+		<mkdir dir="${build.web}" />
+		<javac srcdir="${src.java}" 
+				destdir="${build.classes}" 
+				debug="${build.debug}"
+				debuglevel="${build.debuglevel}"
+				encoding="GBK">
+			<classpath refid="compile.classpath" />
+		</javac>
+		<copy todir="${build.classes}">
+			<fileset dir="${src.properties}" excludes="**/*.java,**/.svn,**/.svn/**"/>
+		</copy>		
+		<copy todir="${build.web}/WEB-INF">
+			<fileset dir="${src.tlds}" includes="**/*.tld" />
+			<fileset dir="${src.xml}" includes="web.xml" />
+		</copy>
+		<copy todir="${build.web}">
+			<fileset dir="${src.jsp}" />
+		</copy>
+	</target>	
+
+	<!--============================================================
+	==== 发布War包
+	==============================================================-->	
+	<target name="war" depends="compile" description="打包应用">
+		<mkdir dir="${deploy.dir}" />
+		<war destfile="${deploy.dir}/${app.name}.war" webxml="${src.xml}/web.xml">
+			<!-- 过滤指定的jar包，必须写成**/servlet-api.jar,**/jsp-api.jar才能生效，写成servlet-api.jar,jsp-api.jar无效 -->
+			<lib dir="${src.lib}" excludes="**/servlet-api.jar,**/jsp-api.jar" />
+			<classes dir="${build.classes}"/>
+			<fileset dir="${build.web}" excludes="**/web.xml" />
+		</war>
+    </target>
+	
+	<!--============================================================
+	==== 直接部署到应用服务器的webapps目录下
+	==============================================================-->	
+	<target name="tomcatinstall" depends="compile" description="部署到应用服务器">
+		<mkdir dir="${deploy.appDir}/WEB-INF/classes"/>
+		<copy todir="${deploy.appDir}/WEB-INF/classes">
+			<fileset dir="${build.classes}"/>
+		</copy>		
+		<mkdir dir="${deploy.appDir}/WEB-INF/lib"/>
+		<copy todir="${deploy.appDir}/WEB-INF/lib">
+			<fileset dir="${src.lib}" excludes="**/servlet-api.jar,**/jsp-api.jar" />
+		</copy>
+		<copy todir="${deploy.appDir}">
+			<!-- 排除匹配的文件和目录 ，目录名必须写成**/lib/， 排除文件写成${web.dir}/WEB-INF/web.xml也不行，必须写成**/web.xml才生效-->
+			<fileset dir="${build.web}" />
+		</copy>
+    </target>
+</project>

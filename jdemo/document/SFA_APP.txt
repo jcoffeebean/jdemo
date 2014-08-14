@@ -1,0 +1,144 @@
+问题：
+    （1）使用sqlitejdbc-v037-native.jar时，启动Tomcat时报错：java.lang.NoClassDefFoundError: org/ibex/nestedvm/Runtime$CallJavaCB
+    （2）启动Tomcat时，报错java.lang.ClassCastException: com.sfa.framework.web.tag.logic.IterateTei cannot be cast to javax.servlet.jsp.tagext.TagExtraInfo，
+    或者登陆http://localhost:8080/SFA/，报错org.apache.jasper.JasperException: java.lang.NullPointerException；
+    （3）用sqlite时从数据文件里面取出来的中文为乱码
+
+解决办法：
+    （1）将sqlitejdbc.dll文件添加到PATH搜索路径下
+    （2）删除发布包WEB-INF/lib下面的jsp-api.jar，因为Tomcat的lib目录下面已经有该jar包
+		（3）有待解决...
+
+注：jtds-1.2.jar --连接SqlServer的驱动包：
+                   driverClass： net.sourceforge.jtds.jdbc.Driver
+                   url： jdbc:jtds:sqlserver://localhost:1433/SFA_APP
+                   
+
+文件web.xml里面的重要配置：                   
+context-param：contextConfigLocation= /WEB-INF/classes/applicationContext-DAO.xml
+		                                  /WEB-INF/classes/applicationContext-JNDI.xml
+
+filter：
+       CacheFilter = com.opensymphony.oscache.web.filter.CacheFilter
+         过滤：*.html
+       SetCharacterEncoding = com.sfa.framework.web.util.SetCharacterEncodingFilter
+         过滤：/*
+       RolesRequestListener = com.sfa.sysmodule.common.action.RolesRequestListener
+         过滤：*.do,*.sys
+       initData = com.sfa.sysmodule.common.action.InitDataFilter
+         过滤：*.do,*.sys,*.web
+
+
+
+
+servlet：
+				--context、initDataServlet、fck三个servlet随容器启动
+				
+				context = org.springframework.web.context.ContextLoaderServlet      load-on-startup = 1
+				
+				initDataServlet = com.sfa.sysmodule.common.action.InitDataServlet   load-on-startup = 2   执行init()方法
+				
+				fck = com.sfa.framework.core.fckeditor.connector.ConnectorServlet   load-on-startup = 3   
+					 拦截：/common/fckeditor/editor/filemanager/connectors/*
+					 
+				all = com.sfa.framework.web.action.ControlCenterAction
+				   拦截：*.do,*.sys,*.web
+				   
+				AxisServlet = org.apache.axis.transport.http.AxisServlet
+				   拦截：/servlet/AxisServlet,/axisServices/*
+				
+
+自定义标签库：      /WEB-INF/SFA.tld
+异常信息处理工具类：com.sfa.framework.core.util.ExceptionTool
+
+关注点：
+		1.页面表单form的token标签，以及令牌token的生成算法；
+
+
+1.登录：
+path:/ums/UmsUser_logon.sys
+/ums/UmsUser_logon.sys的请求调用的类是：com.sfa.sysmodule.ums.action.UmsUserAction----执行的方法是：logon
+
+sql==select  * from Ums_User where account='admin';
+sql== select * from   ums_module where id  in (select module_id  from  ums_role_module where role_id in  ( select role_id  from ums_user_role where user_id=1)  );
+sql== select p.id as id,p.code as code,p.url as url,p.module_id  as module_id from ums_role_point rp    left join ums_user_role ur on rp.role_id=ur.role_id   left join UMS_POINT p on rp.point_id = p.id   where ur.user_id=1 and p.type='2'  union    select  p.id as id,p.code as code,p.url as url,p.module_id  as module_id  from  UMS_POINT p    left join UMS_ROLE_MODULE rm on p.module_id=rm.module_id   left join ums_user_role ur on rm.role_id=ur.role_id  where ur.user_id=1  and p.type='3';
+update Sql== update Ums_User set CRT_BY= ?  , GROUP_ID = ?  , NAME = ?  , LOGON_IP = ?  , PAGE_SIZE = ?  , REMARK = ?  , MD_DT = ?  , LOGON_TIME = ?  , STATUS = ?  , ONE_MENU_ID = ?  , ACCOUNT = ?  , MAIL = ?  , MD_BY = ?  , PHONE = ?  , STYLE = ?  , PHONE_EX = ?  , MOBILE = ?  , SEX = ?  , PASSWORD = ?  , CRT_DT = ?   where 1=1  AND ID = ? ;
+sql==select *  From UMS_USER_DEF_MODULE  where user_id=1 and one_menu_id=101;
+sql== select a.*,b.name as parentName     from ums_module  a left join ums_module  b on a.parent_id=b.id     where a.id=3010101;
+sql== select a.*,b.name as parentName     from ums_module  a left join ums_module  b on a.parent_id=b.id     where a.id=20101;
+sql== select a.*,b.name as parentName     from ums_module  a left join ums_module  b on a.parent_id=b.id     where a.id=101;
+sql== select a.*,b.name as parentName     from ums_module  a left join ums_module  b on a.parent_id=b.id     where a.id=1;
+
+showLeftMenu returnUrl=/ums/UmsUser_list.sys?moduleId=3010101&CUUR=1&two_id=20101
+path:/ums/UmsUser_userHome.sys
+/ums/UmsUser_userHome.sys的请求调用的类是：com.sfa.sysmodule.ums.action.UmsUserAction----执行的方法是：userHome				
+
+
+
+2.点击用户管理:
+sql== select a.*,b.name as parentName     from ums_module  a left join ums_module  b on a.parent_id=b.id     where a.id=3010101;
+sql== select a.*,b.name as parentName     from ums_module  a left join ums_module  b on a.parent_id=b.id     where a.id=20101;
+sql== select a.*,b.name as parentName     from ums_module  a left join ums_module  b on a.parent_id=b.id     where a.id=101;
+sql== select a.*,b.name as parentName     from ums_module  a left join ums_module  b on a.parent_id=b.id     where a.id=1;
+
+path:/ums/UmsUser_list.sys		
+/ums/UmsUser_list.sys的请求调用的类是：com.sfa.sysmodule.ums.action.UmsUserAction----执行的方法是：list
+
+pageListQuery== select  r.*,g.name as groupname from   ums_user  r left join ums_group  g   on r.group_id=g.id where 1=1   ORDER BY r.logon_time DESC  ;	                                       
+sql==select * from ums_group  
+
+
+1.浏览器输入http://localhost:8080/SFA_APP回车，跳转到欢迎页面/index.jsp
+------> /ums/UmsUser_loginEdit.sys，由三个Filter处理之后，再由一个servlet-中央控制器ControlCenterAction转发，跳转到/ums/login.jsp
+------>/sys/Public_checkcode.sys，由三个Filter处理之后，再由一个servlet-中央控制器ControlCenterAction转发，输出验证码图片到页面显示
+------>输入正确的用户名/密码登录，表单提交到/ums/UmsUser_logon.sys，同上。。。
+
+
+备注：language_country: zh_CN、en_US                 
+                   
+                   
+                   
+2.登陆时执行UmsUserAction.logon()方法，查询信息：
+--（1）通过账号获得用户信息
+select  * from Ums_User where account='admin'
+
+--（2）根据用户ID获得其在系统中所拥有的操作权限，moduleList
+select * from   ums_module where id  in (select module_id  from  ums_role_module where role_id in  ( select role_id  from ums_user_role where user_id=1)  ) ;
+
+--（3）根据用户ID获得其在系统中所拥有的功能点权限，pointList
+select p.id as id,p.code as code,p.url as url,p.module_id  as module_id from ums_role_point rp    left join ums_user_role ur on rp.role_id=ur.role_id   left join UMS_POINT p on rp.point_id = p.id   where ur.user_id=1 and p.type='2'  union    select  p.id as id,p.code as code,p.url as url,p.module_id  as module_id  from  UMS_POINT p    left join UMS_ROLE_MODULE rm on p.module_id=rm.module_id   left join ums_user_role ur on rm.role_id=ur.role_id  where ur.user_id=1  and p.type='3' 
+		1--公开的功能点；
+		2--权限功能点；
+		3--权限继承功能模块；
+		4--无效的功能点；
+		
+--（4）a.保存用户信息到session里面；
+       b.得到一级菜单在首页的top中显示，处理上面的moduleList数据得到topMenuList；
+
+--（5）umsUserDAO.saveBean(userBean);
+
+--（6）UmsUserAction.showLeftMenu()，为显示左边的菜单准备数据
+			a.一级菜单moduleId=101 系统管理
+			b.左侧的菜单列表getLeftMenuList递归调用，得到leftMenuList和leftMenuList2
+			c.获取默认打开的二级菜单
+				select *  From UMS_USER_DEF_MODULE  where user_id=1 and one_menu_id=101
+				
+			d.根据模块ID获得每页显示的页头,getPageTile递归调用
+select a.*,b.name as parentName from ums_module a left join ums_module b on a.parent_id=b.id where a.id=3010101;
+select a.*,b.name as parentName from ums_module a left join ums_module b on a.parent_id=b.id where a.id=20101;			
+select a.*,b.name as parentName from ums_module a left join ums_module b on a.parent_id=b.id where a.id=101;			
+select a.*,b.name as parentName from ums_module a left join ums_module b on a.parent_id=b.id where a.id=1;	
+title=系统管理 <img src="/SFA_APP/pub/style/base/images/iteam/guide.gif" border="0" />用户管理 <img src="/SFA_APP/pub/style/base/images/iteam/guide.gif" border="0" />用户管理      
+      
+      e.returnUrl=/ums/UmsUser_list.sys?moduleId=3010101&CUUR=1&two_id=20101  
+       request.setAttribute("threeUrl", returnUrl);
+       
+      f.showLeftMenu()返回，return: /common/sitemesh/base/left.jsp
+                
+3.UmsUserAction.logon()返回url=/common/sitemesh/base/main.jsp，在ControlCenterAction里面forward                   
+                   
+                   
+                   
+                   
+                   
+                   

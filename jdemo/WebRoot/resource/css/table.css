@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+/*--默认的表格样式--*/
+.TabList{margin:0 auto;border-top:1px solid #eee;table-layout: fixed;}
+.TabList thead tr.title{color:#4b4949;line-height:21px;height:23px;}
+.TabList thead tr th{text-align: center;font-weight: bold;border-bottom:1px solid #808080;border-right:1px solid #808080;white-space: nowrap;overflow:hidden;text-overflow:ellipsis;}
+.TabList tbody tr.odd{background-color: #fff;}
+.TabList tbody tr.even{background-color: #f4f6fa;}
+.TabList tbody tr.selected{background-color: #cbe3fb;color: #fff;}
+.TabList tbody tr.hover{background-color: #fde9db;}
+.TabList tbody td{line-height:30px;height:30px;white-space: nowrap;overflow:hidden;text-overflow:ellipsis;padding: 0px 5px;border-bottom:1px solid #eee;}
+.TabList tbody td.first{background-image:none;border-left:1px solid #eee;}
+.TabList tbody td.last{border-right:1px solid #eee;}
+.TabList tfoot td{height: 30px;line-height: 30px;}
+
+.TabList2{margin:0 auto;table-layout: fixed;}
+.TabList2 tbody tr.odd{background-color: #fff;}
+.TabList2 tbody tr.even{background-color: #f4f6fa;}
+.TabList2 tbody td{line-height:20px;height:20px;white-space: nowrap;overflow:hidden;text-overflow:ellipsis;padding: 0px 5px;border-bottom:1px dotted silver;}
+
+.page_row{width:99%;margin:0 auto;}
+.page_row .bt{width:10%;float:left;text-align:left;}
+.page_row .msg{float:left;text-align:left;width: auto;}
+.page_row .page{float:right;text-align:right;width: auto;}
+.page_row .page a{margin: 2px;}
+.page_row .page img{margin-top: 8px;_margin-top: 4px;}
+.page_row .page input{width: 18px !important;border: 1px solid silver;_margin-bottom: 4px;}

@@ -1,0 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/pages/commons/taglibs.jsp" %>
+    <div id="footer">
+    	<div class="wrap">
+           <p>技术支持：深圳市汇智高科信息技术有限公司</p>
+        </div> 
+        <iframe id="ajaxframe" name="ajaxframe" width="1" height="1" class="hidden"></iframe>  
+        <div id="windows"></div>
+    </div>

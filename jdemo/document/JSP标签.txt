@@ -1,0 +1,62 @@
+JSP1.1 TagSupport.SKIP_BODY,SKIP_PAGE,EVAL_BODY_INCLUDE,EVAL_BODY_AGAIN
+
+
+--标签类返回值的各个含义：
+	SKIP_BODY          隐含值0: 跳过了开始和结束标签之间的代码。 Valid return value for doStartTag and doAfterBody
+	EVAL_BODY_INCLUDE  隐含值1: 将body的内容输出到存在的输出流中 Valid return value for doStartTag  
+	SKIP_PAGE          隐含值5: 不解析标签后面的JSP内容          Valid return value for doEndTag 
+	EVAL_PAGE          隐含值6: 继续执行下面的页                 Valid return value for doEndTag
+  EVAL_BODY_AGAIN    反复执行所处的方法
+---------------------------------------------------------------  
+
+doStartTag()和doEndTag()返回值是在Tag  Interface里定义的静态int  
+   
+
+在doStartTag()方法中，若返回EVAL_BODY_INCLUDE就计算标签的body ，若返回SKIP_BODY就不计算标签的body  
+   
+在doEndTag()方法中，若返回EVAL_PAGE容器在标签结束时继续计算jsp页面的其它部分，若返回SKIP_PAGE则在
+标签结束时停止计算jsp页面其他的部分。  
+   
+当你实现了BodyTag接口时，也就是你进行带body标签的开发时，有doAfterBody()方法。当返回EVAL_BODY_TAG
+时，表示继续计算一次BodyTag，直到返回SKIP_BODY才会调用doEndTag()方法
+
+ 
+
+--传统的标签的生命周期：
+
+当容器创建一个新的标签实例后，通过setPageContect(PageContext)来设置标签的页面上下文；
+使用setParent(Tag)方法设置这个标签的上一级标签，如果没有上一级标签，设置为null；
+设置标签的属性，这个属性在标签库描述文件中定义，如果没有定义属性，就不调用此类方法；
+调用doStartTag(),这个方法有两个返回值：              
+
+	1、如果返回的是：EVAL_BODY_INCLUDE, 则继续计算Body。                                             
+
+	2、如果返回的是：SKIP_BODY 就不计算 Body。
+
+调用doEndTag(),这个方法也有两个返回值：                                                       
+
+	1、如果返回的是：EVAL_PAGE , 容器将在标签结束时继续计算 JSP 页面其他的部分；                   
+
+	2、如果返回的是：SKIP_PAGE ，容器将在标签结束时停止计算 JSP 页面其他的部分。
+
+调用release() 方法释放程序占用的任何资源。
+
+
+--带有Body的标签的生命周期：
+
+当容器创建一个新的标签实例后，通过setPageContect(PageContext)来设置标签的页面上下文；
+使用setParent(Tag)方法设置这个标签的上一级标签，如果没有上一级标签，设置为null；
+设置标签的属性，这个属性在标签库描述文件中定义，如果没有定义属性，就不调用此类方法；
+
+调用doStartTag(),这个方法有两个返回值：
+	1、如果返回的是：EVAL_BODY_INCLUDE, 则继续计算Body。                                                                                                                
+	2、如果返回的是：SKIP_BODY 就不计算 Body。
+调用 setBodyContent() 设置当前的 BodyContent；
+调用 doInitBody() ，如果在计算 BodyContent 时需要进行一些初始化，就在这个方法中进行。
+每次计算完BodyTag后调用doAfterBody()：
+	1、如果方法返回 EVAL_BODY_TAG, 继续计算Body, 直到返回 SKIP_BODY；                                                                                        
+  2、如果方法返回 SKIP_BODY 则执行第 8 步；                                                                
+调用doEndTag(),这个方法也有两个返回值：
+	1、 如果返回的是：EVAL_PAGE , 容器将在标签结束时继续计算 JSP 页面其他的部分；                                                                     
+  2、如果返回的是：SKIP_PAGE ，容器将在标签结束时停止计算 JSP 页面其他的部分。
+调用release() 方法释放程序占用的任何资源。

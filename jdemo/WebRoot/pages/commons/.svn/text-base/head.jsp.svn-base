@@ -1,0 +1,31 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/pages/commons/taglibs.jsp" %>
+		<div id="header">
+			<div class="logo">LOGO</div>
+		</div>
+		
+		<div id="user-nav" class="navbar navbar-inverse">
+            <ul class="nav btn-group">
+                <li class="btn btn-inverse"><a href="#"><i class="icon icon-cog"></i><span class="text">设置</span></a></li>
+                <li class="btn btn-inverse"><a href="#"><i class="icon icon-share-alt"></i><span class="text">退出</span></a></li>
+            </ul>
+        </div>
+            
+		<div id="sidebar">
+			<div class="mainmenu">
+				<a id="menu_switch" title="收起菜单"><i class="icon icon-arrow-left"></i></a>
+			</div>
+			<ul>
+				<li${param.menu=='home'?' class="active"':''}><a href="#"><i class="icon icon-home"></i><span>首页</span></a></li>
+				<li${param.menu=='device'?' class="active"':''}><a href="${ctx}/cs"><i class="icon icon-edit"></i><span>探头登记</span></a></li>
+				<li${param.menu=='check'?' class="active"':''}><a href="${ctx}/td"><i class="icon icon-facetime-video"></i><span>视频巡检</span></a></li>
+				<li class="submenu">
+					<a href="#"><i class="icon icon-th-list"></i><span>系统设置</span> <span class="label">3</span></a>
+					<ul>
+						<li><a href="#">数据字典管理</a></li>
+						<li><a href="#">企业信息维护</a></li>
+						<li><a href="#">机器型号维护</a></li>
+					</ul>
+				</li>							
+			</ul>
+		</div>

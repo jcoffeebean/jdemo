@@ -1,0 +1,57 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="true" monitoring="autodetect"
+         dynamicConfig="true">
+    
+    <diskStore path="user.home/cachetmp"/>
+    
+    <defaultCache
+           maxEntriesLocalHeap="0"
+           eternal="false"
+           timeToIdleSeconds="900"
+           timeToLiveSeconds="1800">
+    </defaultCache>
+   
+    <cache name="dictdata"
+           maxEntriesLocalHeap="1000000"
+           maxEntriesLocalDisk="0"
+           eternal="true">
+    </cache>
+
+    <cache name="userdata"
+           maxEntriesLocalHeap="100000"
+           maxEntriesLocalDisk="0"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           timeToIdleSeconds="900"
+           timeToLiveSeconds="1800"
+           diskExpiryThreadIntervalSeconds="60"
+           memoryStoreEvictionPolicy="LFU">
+    </cache>
+    
+    <cache name="appdata"
+           maxEntriesLocalHeap="100000000"
+           maxEntriesLocalDisk="0"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true"
+           timeToIdleSeconds="10800"
+           timeToLiveSeconds="86400"
+           diskExpiryThreadIntervalSeconds="3600"
+           memoryStoreEvictionPolicy="LFU">
+    </cache>
+    <!-- 
+    		name: 缓存名称
+    		maxEntriesLocalHeap： 
+    		maxEntriesLocalDisk： 
+    		eternal： 对象是否永久有效，一旦设置了，timeout将不起作用
+    		overflowToDisk： 当内存中的对象数达到 maxElementsInMemory时，Ehcache会将对象写到磁盘中。
+    		diskPersistent：是否缓存虚拟机重启期数据
+    		timeToIdleSeconds： 对象失效前的闲置时间（单位：秒）
+    		timeToLiveSeconds： 对象失效前的存活时间（单位：秒）
+    		diskExpiryThreadIntervalSeconds： 磁盘失效线程运行时间间隔（默认120秒）
+    		memoryStoreEvictionPolicy： 当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略清理内存(默认：LRU-最近最少使用)
+     -->
+
+</ehcache>
