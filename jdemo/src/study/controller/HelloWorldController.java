@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -33,6 +35,7 @@ import study.entity.QQ;
 @Controller  //或者 @RequestMapping   //1.将一个普通的POJO类声明为处理器
 public class HelloWorldController {
 	
+	public static Log logger = LogFactory.getLog(HelloWorldController.class);
 	/**
 	 * 进入控制器首先执行标有注解@ModelAttribute的方法，
 	 * 有多个的时候依次执行，最后根据URL进入功能处理方法
@@ -79,6 +82,7 @@ public class HelloWorldController {
 			data.put("id", id);
 			data.put("message", "哈哈哈哈哈哈哈哈哈哈");
 		}
+		logger.info(data);
 		return data;
 	}
 	
@@ -106,7 +110,7 @@ public class HelloWorldController {
 		qq.setSfzh("421281198858898789");
 		qq.setXm("ZHW");
 	    String xml = qq.toString();
-
+	    logger.info(xml);
 	    byte[] documentBody = xml.getBytes();
 
 	    HttpHeaders header = new HttpHeaders();
