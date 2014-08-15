@@ -3,19 +3,28 @@
  */
 package study.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import study.entity.QQ;
 
 /**
  * 
@@ -87,5 +96,22 @@ public class HelloWorldController {
 		mv.addObject("viewName", mv.getViewName());
 		
 		return mv;  //包含模型数据和逻辑视图名
+	}
+	
+	@RequestMapping(value="xml")
+	public HttpEntity<byte[]> getXml(ModelMap map, HttpServletResponse response) {
+		
+		QQ qq = new QQ();
+		qq.setQq("1237896985");
+		qq.setSfzh("421281198858898789");
+		qq.setXm("ZHW");
+	    String xml = qq.toString();
+
+	    byte[] documentBody = xml.getBytes();
+
+	    HttpHeaders header = new HttpHeaders();
+	    header.setContentType(new MediaType("application", "xml"));
+	    header.setContentLength(documentBody.length);
+	    return new HttpEntity<byte[]>(documentBody, header);
 	}
 }

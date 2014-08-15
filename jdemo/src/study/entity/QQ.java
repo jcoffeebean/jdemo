@@ -30,4 +30,7 @@ public class QQ {
 		this.qq = qq;
 	}
 	
+	public String toString() {
+		return "[xm:" + xm + ", sfzh:" + sfzh + ", qq:" + qq + "]";
+	}
 }
