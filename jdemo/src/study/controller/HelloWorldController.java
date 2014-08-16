@@ -6,6 +6,7 @@ package study.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import study.entity.QQ;
@@ -117,5 +119,35 @@ public class HelloWorldController {
 	    header.setContentType(new MediaType("application", "xml"));
 	    header.setContentLength(documentBody.length);
 	    return new HttpEntity<byte[]>(documentBody, header);
+	}
+	
+	/**
+	 *requestmapping如果采用uritemplate后如何识别具体的URL对应哪个uritemplate及提取url中的变量名值的API_备忘
+	 * @return
+	 */
+	@RequestMapping(value="u/{id}/name/{address}")
+	public @ResponseBody Map testUriTemplate(HttpServletRequest request) {
+		Map dataMap = new HashMap();
+		String pattern = (String) request
+				.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
+		dataMap.put("1", "url is[" + request.getServletPath() + "] match uritemplate is [" + pattern + "]");
+		logger.info("url is[" + request.getServletPath() + "] match uritemplate is [" + pattern + "]");
+		Map<String, String> pathVariables = (Map<String, String>) request
+				.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+		logger.info("变量个数" + pathVariables.keySet().size());
+		int index = 1;
+		for (Iterator<String> iterator = pathVariables.keySet().iterator(); iterator.hasNext();) {
+			String key = iterator.next();
+			logger.info(key + "=>" + pathVariables.get(key));
+			dataMap.put("param_" + index++, key + "=" + pathVariables.get(key));
+		}
+		
+		
+		//测试日志级别
+		logger.debug("+++++++++debug+++++++++");
+		logger.info("+++++++++info+++++++++");
+		logger.warn("+++++++++warn+++++++++");
+		logger.error("+++++++++error+++++++++");
+		return dataMap;
 	}
 }
