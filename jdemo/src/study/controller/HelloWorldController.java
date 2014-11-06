@@ -3,7 +3,6 @@
  */
 package study.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,7 +22,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,6 +57,18 @@ public class HelloWorldController {
 		return Arrays.asList("佛山","北京");
 	}
 	
+	@ModelAttribute // 没有返回值呢？
+	public void getNameList4() {
+		Arrays.asList("佛山","北京");
+		logger.info("Test--");
+	}
+	
+	@ModelAttribute(value = "nameList5") // 没有返回值呢？
+	public void getNameList5() {
+		Arrays.asList("佛山","北京");
+		logger.info("Test--");
+	}
+	
 	@RequestMapping(value="/hello")  //请求URL（/hello，如果@Controller处有value值，则此处的URL前面还要加上此value）到处理器的功能处理方法的映射
 	public ModelAndView helloWorld(){
 		
@@ -86,6 +96,20 @@ public class HelloWorldController {
 		}
 		logger.info(data);
 		return data;
+	}
+	
+	@RequestMapping(value="/jsonp/{id}")
+	public @ResponseBody String jsonpService(@PathVariable String id, String callback) { //@ResponseBody 表示服务返回json格式的数据
+		StringBuffer sb = new StringBuffer(callback != null ? callback : "cllBack").append("(");
+		if (id != null) {
+			//你的业务逻辑处理
+			
+			//处理结果放到集合里面返回给调用的客户端
+			sb.append("{\"id\":\"").append(id).append("\"}");
+		}
+		sb.append(")");
+		logger.info(sb.toString());
+		return sb.toString();
 	}
 	
 	@RequestMapping(value="/f")  //请求URL（/jsp）到处理器的功能处理方法的映射 //

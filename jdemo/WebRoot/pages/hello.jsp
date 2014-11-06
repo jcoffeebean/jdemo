@@ -20,6 +20,8 @@
     	<li>${nameList}</li>
     	<li>${nameList2}</li>
     	<li>${stringList}</li>
+    	<li>${nameList4}</li>
+    	<li>${nameList5}</li>
     </ul>
     </div>
   </body>
