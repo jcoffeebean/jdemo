@@ -1,6 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<!DOCTYPE html>
 <html>
-	<head><title>forward-result.jsp</title></head>
+	<head>
+		<title>forward-result.jsp</title>
+	</head>
 	<body>
 	服务器内部跳转forward到forward-result.jsp页面</br></br>
 	<!-- 使用request内置对象获取参数age的值 -->
@@ -85,5 +88,6 @@ java.io.IOException: Stream closed
 	<jsp:include page="form-commit.jsp">
 		<jsp:param value="tw_arci" name="username"/>
 	</jsp:include>
+<%-- 	<%@ include  file="form-commit.html"%> --%>
 	</body>
 </html>

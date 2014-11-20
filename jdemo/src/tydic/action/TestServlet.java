@@ -1,10 +1,12 @@
 package tydic.action;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -33,11 +35,10 @@ public class TestServlet extends HttpServlet {
 			Connection conn = DriverManager.getConnection(url,username,pwd);
 			Statement st = conn.createStatement();
 			
-			ResultSet rs = st.executeQuery("select * from user_info");
+			ResultSet rs = st.executeQuery("select * from user_tab_comments");
 			
 			//获取页面输出流
 			PrintStream out = new PrintStream(response.getOutputStream());
-			
 			out.print("<html>");
 			out.print("<head>");
 			out.print("<title>Servlet测试 读取配置参数，注意与application读取配置参数的区别</title>");
@@ -51,6 +52,10 @@ public class TestServlet extends HttpServlet {
 			out.print("</table>");
 			out.print("</body>");
 			out.print("</html>");
+			
+			//转发
+//			RequestDispatcher rd = request.getRequestDispatcher("/head.html");
+//			rd.forward(request, response);
 			
 		} catch(Exception e) {
 			e.printStackTrace();

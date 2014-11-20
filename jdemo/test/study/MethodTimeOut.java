@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
@@ -30,8 +29,9 @@ public class MethodTimeOut {
 					}
 				});
 		executor.submit(future);
+		Map result = null;
 		try {
-			Map result = future.get(50, TimeUnit.SECONDS);
+			result = future.get(1, TimeUnit.SECONDS);
 			System.out.println(result);
 		} catch (InterruptedException e) {
 			System.out.println("方法执行中断");
@@ -40,19 +40,35 @@ public class MethodTimeOut {
 			future.cancel(true);
 		} catch (TimeoutException e) {
 			System.out.println("方法执行时间超时");
-			// future.cancel(true);
+//			future.cancel(true);
+			try {
+				System.out.println("Main: " + Thread.currentThread().getName());
+				Thread.currentThread().sleep(2000);
+				try {
+					result = future.get(1000, TimeUnit.SECONDS);
+				} catch (ExecutionException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (TimeoutException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
 		}
-		System.out.println("sas");
+		System.out.println(result);
 		executor.shutdown();
 	}
 
 	public String getValue() {
 		try {
-			Thread.sleep(5000);
+			System.out.println("MethodT: " + Thread.currentThread().getName());
+			Thread.currentThread().sleep(2000);
 		} catch (Exception e) {
 			e.printStackTrace();// TODO: handle exception
 		}
-		throw new RuntimeException();
-//		return "ssssssssssssssss";
+//		throw new RuntimeException();
+		return "ssssssssssssssss";
 	}
 }

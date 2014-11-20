@@ -13,16 +13,16 @@
 
 	<context-param>
 		<param-name>url</param-name>
-		<param-value>jdbc:oracle:thin:@HAWK:1521:orcl</param-value>
+		<param-value>jdbc:oracle:thin:@10.42.11.34:1521:orcl</param-value>
 	</context-param>
 			
 	<context-param>
 		<param-name>user</param-name>
-		<param-value>emcd</param-value>
+		<param-value>cidmon</param-value>
 	</context-param>
 	<context-param>
 		<param-name>pwd</param-name>
-		<param-value>emcd</param-value>
+		<param-value>cidmon</param-value>
 	</context-param>
 
 	<!-- 设置Spring容器加载配置文件路径 -->
@@ -36,9 +36,9 @@
 	</context-param>
     
 	<!-- 上下文Spring监听器 -->
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+<!-- 	<listener> -->
+<!-- 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
+<!-- 	</listener> -->
 	<!-- 使用spring中的Log4jConfigListener动态的改变记录级别和策略，不需要重启Web应用  --> 
 	<listener>
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
@@ -106,15 +106,15 @@
 			</init-param>			
 			<init-param>
 				<param-name>url</param-name>
-				<param-value>jdbc:oracle:thin:@192.168.0.104:1521:oradb</param-value>
+				<param-value>jdbc:oracle:thin:@10.42.11.34:1521:ORCL</param-value>
 			</init-param>
 			<init-param>
 				<param-name>username</param-name>
-				<param-value>pzk</param-value>
+				<param-value>cidmon</param-value>
 			</init-param>
 			<init-param>
 				<param-name>pwd</param-name>
-				<param-value>pzk</param-value>
+				<param-value>cidmon</param-value>
 			</init-param>
     </servlet>
     <servlet-mapping>

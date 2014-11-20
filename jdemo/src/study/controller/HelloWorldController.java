@@ -112,6 +112,21 @@ public class HelloWorldController {
 		return sb.toString();
 	}
 	
+	@RequestMapping(value="/jsonp2/{id}")
+	public @ResponseBody String jsonpService2(@PathVariable String id, String callback) { //@ResponseBody 表示服务返回json格式的数据
+		StringBuffer sb = new StringBuffer(callback != null ? callback : "cllBack").append("(");
+		if (id != null) {
+			//你的业务逻辑处理
+			
+			//处理结果放到集合里面返回给调用的客户端
+			sb.append("{\"id\":\"").append(id).append("\"}");
+		}
+		sb.append(");");
+		sb.append("function ").append(callback != null ? callback : "cllBack").append("(o) {var id = o.id; alert(id);}");
+		logger.info(sb.toString());
+		return sb.toString();
+	}
+	
 	@RequestMapping(value="/f")  //请求URL（/jsp）到处理器的功能处理方法的映射 //
 	public ModelAndView forward(HttpServletRequest request){
 		String username = request.getParameter("username");

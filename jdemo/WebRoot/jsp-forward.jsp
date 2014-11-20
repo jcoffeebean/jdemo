@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-
+<!DOCTYPE html>
 <html>
-<head>
-	<title>jsp-forward.jsp</title>
-</head>
+	<head>
+		<title>jsp-forward.jsp</title>
+	</head>
 <body>
 	<%
 		out.println("jsp:forward测试");
