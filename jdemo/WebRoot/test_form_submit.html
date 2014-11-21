@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-Type" content="text/html;charset=utf-8"/>
+		<script src="./js/jquery/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+				var param = document.location.search;
+				alert("document.location.search = " + param)	
+		</script>
+	</head>
+	<body>
+		<form id="list_form" method="get" action="accept_data.html?id=888">
+			<input type="hidden" id="c_name" name="c_name" value=""/>
+			<span>手机号：</span>
+			<input type="text" id="sjh" name="sjh" value=""/>
+			<label>备注：</label>
+			<textarea name="bz"></textarea>
+			<input type="submit" value="提交"/>
+		</form>
+		<p>
+			form表单的method=get时，提交时，表单参数自动添加到url后面
+		</p>
+		<div>
+			<span id="data"></span>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+					var name = $('#c_name').val();
+					var sjh = $('#sjh').val();
+					var bz = $('#bz').val();
+					$('#data').html("隐藏域c_name：" + name +", 输入的手机号：" + sjh + ", 备注：" + bz);
+			});
+		</script>
+	</body>
+</html>

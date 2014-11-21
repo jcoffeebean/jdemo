@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+	// 寄生组合式继承 -  引用类型最理想的继承范式
+	
+	function inheritPrototype(subType, superType){
+		var prototype = Object.create(superType.prototype); // 创建对象 
+		//var prototype = superType.prototype;
+		prototype.constructor = subType; // 增强对象
+		subType.prototype = prototype;	 // 指定对象
+	}
+	
+	function SuperType(name){
+		this.name = name;
+		this.colors = ["yellow","black"];
+	}
+	
+	SuperType.prototype.sayName = function(){
+		alert(this.name);
+	};
+	
+	function SubType(name, age){
+		SuperType.call(this,name);
+		
+		this.age = age;
+	}
+	
+	inheritPrototype(SubType,SuperType);
+	
+	SubType.prototype.sayAge = function(){
+		alert(this.age);
+	};
+	
+	var ins1 = new SubType("Brillian",26);
+	ins1.sayName();
+	ins1.sayAge();
+</script>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+	function Person(name,age,job) {
+		this.name = name;
+		this.age = age;
+		this.job = job;
+		this.sayName = function() {
+			alert(this.name);
+		}
+	}	
+	
+	var p1 = new Person("Taow",26,"Software Engineer");
+	var p2 = new Person("Kafk",26,"Dev Engineer");
+	alert(p1 instanceof Person); //true
+	alert(p1 instanceof Object); //true
+	
+	// 作为普通函数调用
+	Person("Greg", 27, "Doctor"); // 添加到window 
+	window.sayName(); //"Greg" 
+	
+	// 在另一个对象的作用域中调用
+	var o1 = new Object(); 
+	Person.call(o1, "Kristen", 25, "Nurse"); 
+	o1.sayName(); //"Kristen" 
+	var o2 = new Object(); 
+	Person.apply(o2, ["Gristen", 25, "Nurse"]); 
+	o2.sayName(); //"Gristen" 
+	
+	alert(o2.sayName instanceof Function);
+	// 构造函数模式：不同实例上的同名函数是不相等的
+	alert(o2.sayName == o1.sayName); //false
+	
+	// 将sayName()的定义移到构造函数的外部，此时alert(o2.sayName == o1.sayName); //true
+	function Person(name,age,job) {
+		this.name = name;
+		this.age = age;
+		this.job = job;
+		this.sayName = sayName;
+	}		
+	
+	function sayName() {
+			alert(this.name)
+	}
+	
+</script>

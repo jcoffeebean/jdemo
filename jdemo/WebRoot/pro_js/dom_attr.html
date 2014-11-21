@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>窗口位置和大小</title>
+		<script src="../js/jquery/jquery.min.js" type="text/javascript"></script>
+
+	</head>	
+	<body>
+		<div id="conn"><a href="#"></a></div>
+		<div></div>
+	</body>
+	<script type="text/javascript">
+		//当页面有更新时，这些特性值自动更新
+		var allLinks = document.links;
+		//alert(allLinks.length);
+		$('div').eq(1).append(
+				$('<a href="javascript:void(0);">X</a>')
+		);
+		//alert(allLinks.length);
+		
+		//将输出流写入文档
+		document.write("<strong>" + new Date() + "</strong>");
+		//动态包含外部资源
+		document.writeln("<script type=\"text/javascript\" src=\"./test.js\">" + "<\/script>");
+		document.writeln("<strong>xxx</strong>");
+		window.onload = function(){
+			//加载完毕后再写入流会重写整个页面
+			//document.writeln("<strong>" + o.sayHello() + "</strong>");
+			//alert(o.sayHello());
+			
+			//创建DOM元素并追加到页面中
+			var div = document.createElement('div');
+			//操作元素特性
+			div.id = "myDiv";
+			div.className = "box";
+			
+			document.body.appendChild(div);
+		}
+		
+		//序列化元素特性
+		function outputAttribute(element) {
+			var array = new Array(), i,len, arrtName, attrVal;
+			for(i=0,len=element.attributes.length; i<len; i++){
+				if(element.attributes[i].specified){
+					attrName = element.attributes[i].nodeName;
+					attrVal = element.attributes[i].nodeValue;
+					array.push(attrName + "=\"" + attrVal + "\"");
+				}
+			}
+			return array.join(" ");
+		}
+		
+		//alert(outputAttribute(document.getElementById('conn')));
+		
+		//创建一个带name特性的iframe元素
+		var iframe = document.createElement("iframe");
+		document.body.appendChild(iframe);
+		//创建input元素
+		var input = document.createElement("input"); 
+		input.type = "checkbox";
+		//创建button元素
+		var button = document.createElement("input"); 
+		button.type = "button";
+		button.value = "重置";
+		alert(outputAttribute(button));
+		//创建单选按钮
+		var radio1 = document.createElement("input"); 
+		radio1.name = "choice";
+		radio1.type = "radio";
+		var radio2 = document.createElement("input"); 
+		radio2.name = "choice";
+		radio2.type = "radio";
+		
+		document.body.appendChild(input);
+		document.body.appendChild(button);
+		document.body.appendChild(radio1);
+		document.body.appendChild(radio2);
+	</script>	
+</html>

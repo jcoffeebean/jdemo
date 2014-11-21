@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+	// 原型模式
+	function Person(){
+		//覆盖原型中的属性
+		this.sayName = function() {
+			alert("--" + this.name);
+		}
+			
+	}
+	
+	Person.prototype.name = "SoF";
+	Person.prototype.age = 36;
+	Person.prototype.job = "Software Engineer";
+	Person.prototype.sayName = function(){
+			alert(this.name);
+	};	
+
+	
+	var p1 = new Person();
+	p1.sayName();
+	var p2 = new Person();
+	p2.sayName();
+	alert(p1.sayName == p2.sayName);
+	alert(Person.prototype.isPrototypeOf(p1));
+	alert("typeof Person.prototype: " + typeof Person.prototype);
+	alert("typeof p1: " + typeof p1);
+	alert(Object.getPrototypeOf(p2).name);
+	
+	// 虽然可以通过对象实例访问保存在原型中的值，但却不能通过对象实例重写原型中的值
+	p1.name = "Hakel";
+	alert(p1.name);  // 来自对象实例
+	alert(p2.name);  // 来自原型
+	
+	// 获取对象上所有可枚举的属性
+	var keys = Object.keys(Person.prototype);
+	alert("keys: " + keys);
+	var p1keys = Object.keys(p1);
+	alert("p1keys: " + p1keys);
+	
+	// 获取实例所有属性，不管是否可枚举
+	var allKeys = Object.getOwnPropertyNames(Person.prototype);
+	alert("allKeys： " + allKeys);
+	
+	// 给原生引用类型String的原型添加新方法
+	String.prototype.startWith = function(text) {
+		return this.indexOf(text) == 0;
+	};
+	
+	var o = "Hello World!";
+	alert(o.startWith("Hell"));
+</script>

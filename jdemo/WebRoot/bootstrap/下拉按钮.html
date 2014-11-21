@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-Type" content="text/html;charset=utf-8"/>
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<script type="text/javascript" src="./js/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="btn-group">
+			<button class="btn  dropdown-toggle"  data-toggle="dropdown">Action
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li name="1"><a href="javascript: changeJb(this);">Action</a></li>
+				<li name="1"><a href="javascript: changeJb(this);">Another action</a></li>
+				<li name="1"><a href="javascript: changeJb(this);">Something else here</a></li>
+				<li class="divider"></li>
+				<li name="1"><a href="javascript: changeJb(this);">Separated link</a></li>
+			</ul>
+		</div>
+		<div>
+				<ul>
+					<li name="19"><a href="javascript: void(0);" onclick="changeJb(this);">测试</a></li>
+				</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function changeJb(obj){
+			 var name = $(obj).parent().attr('name');
+			 alert(name);
+			 for(var o in obj) {
+			   //alert(o + " = " + obj[o]);	
+			 }
+		}
+			
+	</script>
+</html>

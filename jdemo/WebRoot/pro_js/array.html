@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+		<script type="text/javascript">
+				var arr01 = new Array();//创建了一个空数组
+				var arr02 = new Array('1','tao','999');
+				alert("arr01 length " + arr01.length);
+				alert("arr02 length " + arr02.length);
+				
+				arr02[arr02.length] = "js新世界001";
+				arr02[arr02.length] = "js新世界002";
+				
+				$(function(){
+						window.setTimeout(function(){
+								document.write("put it here-->head: hello js + html + css !");	
+						},5000);
+				});
+		</script>
+	</head>
+	<body>
+			<div style="color: blue;background: pink;">
+			</div>
+			<script type="text/javascript">
+					var content = '';
+					var i = 0;
+					for (var o in arr02) {
+						content += arr02[o] + ' - ';
+					}
+					//alert(content.lastIndexOf(' - '));
+					document.write(content.lastIndexOf('-'));
+					content = content.substring(0, content.lastIndexOf(' - '));
+					$('div').html(content);
+					$('div').click(function(){
+							var cont = $(this).html();
+							$(this).html(cont + " - " + i++);	
+					});
+					$(function(){
+							window.setTimeout(function(){
+									document.write("put it here-->body:  hello js + html + css !");	
+							},2000);
+					});					
+			</script>
+  </body>
+</html>

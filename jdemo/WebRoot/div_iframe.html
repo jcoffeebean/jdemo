@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="./js/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/common/page.js"></script>
+		<style>
+			#container{margin: 0 auto; width: 900px}
+			#lef{float: left;width: 20%;height: 500px; background: #6cf;}
+			#cen{float: left;width: 60%;height: 500px; background: #cff;}
+			#rig{float: left;width: 20%;height: 500px; background: #009900;}
+		</style>	
+	</head>
+	<body>
+		<div id="container">
+			<div id=header">
+				head
+			</div>
+			<div id="main">
+				<div id="lef">
+					ttt
+				</div>
+				<div id="cen">
+					555
+					<div id="cnt_main">
+						<iframe id="frm_log" src="form.html" width="80%" height="100%" style="border:2px solid #000000;" scrolling="auto" onload="logIframeOnload(this)"></iframe>
+					</div>					
+				</div>
+				<div id="rig">
+					555
+				</div>				
+			</div>
+			<div id="footer">
+				底部&gt;&gt;
+			</div>
+		</div>
+		<script type="text/javascript">
+			var userinfo = {"name": "taowei","jgid":"100"};
+			$(function(){
+				userinfo.jgid = '200';
+				alert(userinfo.jgid);
+				if(window['_loadU']) {
+					window['_loadU'](userinfo);
+				}
+			});
+			
+			function loadU(userinfo) {
+				var $html = $('<div class="con_s">' 
+					+ '<span class="s_name">' + userinfo.name + ' - ' + userinfo.jgid
+					+ '</span>'
+				);
+				$html.find('> .s_name').click(function() {
+						alert("html(): " + $html.html());
+						alert("text(): " + $html.text());					
+				});
+				$("#cen").append($html);
+			}
+			//将函数放到全局window对象中
+			window['_loadU'] = loadU;
+			
+			function logIframeOnload() {
+				alert("iframe is loaded!");
+				//var form = document.getElementById("frm_log").contentWindow.document.getElementById("listForm");
+				var form = $("#frm_log")[0].contentWindow.document.getElementById("list_form");
+				form.c_name.value= "陶巍";
+				form.sjh.value = "18682007754";
+				form.bz.value = "当iframe加载完毕后给iframe中的表单域赋值。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。";
+			}
+		</script>
+	</body>
+</html>

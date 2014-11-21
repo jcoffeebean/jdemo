@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+	function createComparisonFunction(propertyName){
+		return function(obj1,obj2){ //闭包
+			var val1 = obj1[propertyName];
+			var val2 = obj2[propertyName];
+			if(val1 > val2){
+				return 1;
+			} else if(val1 < val2){
+				return -1;
+			} else {
+				return 0;
+			}
+		};
+	}
+	
+	var compare = createComparisonFunction("name");
+	var result = compare({name: "Tao"},{name: "Killy"});
+	alert(result);
+	
+	//闭包的副作用：只能取得包含函数中任何变量的最后一个值
+	function createFunctions(){
+		var result = new Array();
+		for(var i=0; i < 10; i++){
+			result[i] = function(){
+				return i;
+			};
+		}
+		return result;
+	}
+	
+	var rs = createFunctions();
+	for(var i in rs){
+		alert(rs[i]());//调用数组里面的每一个函数，返回的值都是10
+	}
+	
+	//改进
+	function createFunctions2(){
+		var result = new Array();
+		for(var i=0; i < 10; i++){
+			result[i] = function(num){
+				return function(){
+						return num;
+					};
+			}(i);
+		}
+		num = 1000;
+		alert("num=" + num);
+		return result;
+	}
+	
+	var rs2 = createFunctions2();
+	for(var i in rs2){
+		alert("rs2["+i+"]="+rs2[i]);
+		alert("rs2["+i+"]()="+rs2[i]());
+	}
+	
+	function x(){
+		xx = parseInt("apo");
+		//arguments[0] = 888;
+		//alert("arguments[0]="+arguments[0]);
+		//alert("xx="+xx);
+	}
+	
+	x();
+</script>

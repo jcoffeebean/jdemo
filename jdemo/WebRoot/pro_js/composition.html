@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+	// 组合使用构造函数模式和原型模式	
+	function Person(name,age,job) {
+		this.name = name;
+		this.age = age;
+		this.job =job;
+		this.friends = ["Bob","Jim"];
+	}
+	
+	Person.prototype = {
+		constructor: Person,
+		sayName: function(){
+			alert(this.name);
+		}
+	};
+	
+	var p1 = new Person("Tony",9,"Software Engineer");
+	var p2 = new Person("Greg" ,19, "Doctor");
+	p1.friends.push("Kim");
+	alert(p1.friends);
+	alert(p2.friends);
+</script>

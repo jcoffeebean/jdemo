@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+	// 	寄生构造函数模式
+	function Person(name ,age, job){
+		var o = new Object();
+		o.name = name;
+		o.age = age;
+		o.job = job;
+		o.sayName = function(){
+			alert(this.name);
+		}
+		return o;
+	}
+	
+	var p1 = new Person("Herk",10,"Doctor");
+	alert(p1 instanceof Person); // false
+	alert(p1 instanceof Object); // true
+	
+	
+	//特殊用法
+	function SpecialArray() {
+		
+		var array = new Array();
+		array.push.apply(array,arguments);
+		
+		//添加方法
+		array.toPipedString = function(){
+			return this.join("|");
+		};
+		//返回数组
+		return array;
+	}
+	
+	var arr = new SpecialArray("J","Kim","Ady");
+	alert(arr.toPipedString());
+</script>

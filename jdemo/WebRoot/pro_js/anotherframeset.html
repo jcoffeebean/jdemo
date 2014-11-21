@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head><title>anotherframeset</title></head>
+	<script type="text/javascript">
+		var tName = "anotherframeset.html";
+		alert("top.frames[1].tName=" + top.frames[1].tName);
+		//alert("top.frames[1].frames[0].tName=" + top.frames[1].frames[0].tName);
+		window.onload = function(){
+			  //µÈÍ¬ÓÚ< a href="http://www.wrox.com" target="topFrame"></a>
+				window.open('http://10.235.111.18:8084/wwb/pub/chartlist/31c16a77c8f997f7eeb71ad0820e9510?act=0','redFrame');
+		};
+	</script>
+	<frameset cols="50%,50%">
+		<frame src="red.html" frameborder="1" name="redFrame">
+		<frame src="blue.html" frameborder="1" name="blueFrame">
+	</frameset>
+</html>

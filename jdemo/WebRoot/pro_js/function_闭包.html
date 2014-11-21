@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+	var name = "The Window";
+	var obj = {
+		name: "My Object",
+		getName: function(){
+			//闭包
+			return function(){
+				return this.name;	
+			};	
+		}	
+	};
+
+	alert(obj.getName()());//The Window
+	
+	var obj2 = {
+		name: "My Object2",
+		getName: function(){
+			var that = this;
+			//闭包
+			return function(){
+				return that.name;	
+			};	
+		}	
+	};
+	alert(obj2.getName()());//My Object2
+	
+	var obj3 = {
+		name: "My Obj3",
+		getName: function(){
+			alert(this.name);	
+		}
+	};
+	
+	obj3.getName();    // My Obj3
+	(obj3.getName)();  // My Obj3
+	//this的值意外改变了
+	(obj3.getName = obj3.getName)(); // The Window
+	(obj3.getName = obj3.getName).call(this); // The Window
+	
+	alert(obj3.getName);
+	
+	//
+</script>

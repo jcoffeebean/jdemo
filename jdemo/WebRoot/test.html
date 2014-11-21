@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+	<head>
+		<style>
+			.p1 {color:red;background:green;font-weight:bold;font-size:16px;}
+			.p2 {color:pink;background:gray;}
+			table {border:0;border-collapse:collapse;}
+			td	{ font:normal 12px/17px Arial;padding:2px;width:100px;}
+			th	{ font:bold 12px/17px Arial;text-align:left;padding:4px;border-bottom:1px	solid #333;}
+			.even		{ background:#FFF38F;}  /* 偶数行样式*/
+			.odd		{ background:#FFFFEE;}  /* 奇数行样式*/
+			.selected	{ background:#FF6500;color:#fff;}
+		</style>
+	<script type="text/javascript" src="./js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.color.v1.js"></script>
+	<!--script type="text/javascript" src="./js/jquery.color.v2.js"></script-->
+	<script type="text/javascript">
+		var _index = 10;
+		
+		function nextData() {
+			_index = _index - 1;
+			return _index;
+		}
+		
+		nextData(_index);
+		//alert(_index);
+		var supported = ("WebSocket" in window);
+		//alert(supported);
+		if(supported) {
+			//alert("WebSocket is supported");
+		}
+		$(function(){
+			//alert($('p').length);
+			//alert($('p').css('color'));	
+			//alert($('.p1').css('color'));	
+			//alert($('.p2').css('color'));	
+			//$('p').css('color','black');	
+			$('table').alterBgColor() //应用插件
+					.find('th').css('color','red'); //可链式操作
+		});
+		
+	</script>
+	</head>
+	<body>
+		<p class="p1">
+			段落1
+		</p>
+		<p class="p2">
+			段落2
+		</p>
+		<table id="tb1">
+			<thead><tr><th></th><th>姓名</th><th>性别</th><th>暂住地</th></tr></thead>
+			<tbody>
+				<tr id="test-tr">
+					<td><input type="checkbox" name="choice1" value=""/></td>
+					<td>11</td>
+					<td>22</td>
+					<td>22</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="choice2" value="" checked="checked"/></td>
+					<td>33</td>
+					<td>44</td>
+					<td>44</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="choice" value=""/></td>
+					<td>55</td>
+					<td>66</td>
+					<td>66</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="choice" value="" /></td>
+					<td>找六</td>
+					<td>男</td>
+					<td>浙江温州</td>	
+				</tr>
+				<tr>
+				<td><input type="checkbox" name="choice" value="" /></td>
+						<td>Rain</td>
+					<td>男</td>
+					<td>浙江杭州</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="choice" value="" checked="checked" /></td>
+					<td>MAXMAN</td>
+					<td>女</td>
+					<td>浙江杭州</td>
+				</tr>				
+			</tbody>
+		</table>
+		<br/><br/>
+		<table id="tb2">
+			<thead><tr><th> </th><th>姓名</th><th>性别</th><th>暂住地</th></tr></thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" name="choice01" value=""/></td>
+					<td>张山</td>
+					<td>男</td>
+					<td>浙江宁波</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="choice02" value="" /></td>
+						<td>李四</td>
+					<td>女</td>
+					<td>浙江杭州</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="choice" value="" checked="checked" /></td>
+							<td>王五</td>
+					<td>男</td>
+					<td>湖南长沙</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="choice" value="" /></td>
+					<td>找六</td>
+					<td>男</td>
+					<td>浙江温州</td>	
+				</tr>
+				<tr>
+				<td><input type="checkbox" name="choice" value="" /></td>
+						<td>Rain</td>
+					<td>男</td>
+					<td>浙江杭州</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="choice" value="" checked="checked" /></td>
+					<td>MAXMAN</td>
+					<td>女</td>
+					<td>浙江杭州</td>
+				</tr>
+			</tbody>
+		</table>
+		<br/>
+		<label>点我，看选中了几个checkbox？</label>
+		<span id="tip" style="display:none"></span>
+		<br/><br/>
+		<img/><img/>
+		<script type="text/javascript">
+				$('label').click(function(){
+							var len = $('tbody > tr:has(:checked)').length;
+							var allName = '';
+							var index = 0;
+							$('tbody > tr:has(:checked)').find('td:first').each(function(){
+									if(index == 0) {
+											allName += $(this).html() + " - " + $(this).next().html();
+									} else {
+											allName += "," + $(this).html() + " - " + $(this).next().html();
+									}
+									index++;
+									//alert(allName)
+							});
+							$('#tip').html('已经选中' + len + "个checkbox: " + allName).css('display','block');
+				});
+				
+				var $img = $('img').each(function(i,o){
+						o.src = 'img' + i +'.jpg';	
+				});
+				alert("$img.length: " + $img.length);
+		</script>	
+	</body>
+</html>

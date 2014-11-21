@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+	<head>
+		<title>FrameSet Example - window_frame.html</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="../js/jquery/jquery.min.js" type="text/javascript"></script>
+			
+		<script type="text/javascript">
+			var tName = "window_frame.html";
+			//alert(top.tName);
+			$(function(){
+				//self始终指向window
+				//alert("top.frames[0].tName - " + top.frames[0].window.tName);	
+				var innerWidth = self.innerWidth;
+				alert('self.tName=' + self.tName);
+				//alert(innerWidth);
+				//window.resizeTo(300,300);
+				//window.find();
+				//window.open('http://localhost:8080/ftwwpm/index3.html','topFrame');
+			});
+		</script>
+	</head>
+	<frameset rows="100,*">
+		<frame src="frame1.html" frameborder="0" name="topFrame" >
+		<frameset cols="80%,10%,10%">
+			<!-- <frame src="http://10.42.0.186:8081/gmmap/api/api.html" frameborder="0" name="leftFrame" > -->
+			<!-- <frame src="http://10.42.0.186:9080/SMF/axlh/index" frameborder="0" name="centerFrame" > -->
+			<frame src="anotherframeset.html" frameborder="0" name="rightFrame" >
+		</frameset>
+	</frameset>
+</html>

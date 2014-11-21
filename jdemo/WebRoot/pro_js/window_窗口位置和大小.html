@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>窗口位置和大小</title>
+		<script type="text/javascript">
+				window.onload = function(){
+					  //跨浏览器获取窗口左边和上边的位置
+						var leftPos = (typeof window.screenLeft == "number") ? window.screenLeft : window.screenX;
+						var topPos = (typeof window.screenTop == "number") ? window.screenTop : window.screenY;
+						alert(leftPos + " " + topPos);
+						
+						window.resizeTo(100,200);					
+				};
+
+		</script>
+	</head>	
+	<body>
+	</body>
+	
+</html>

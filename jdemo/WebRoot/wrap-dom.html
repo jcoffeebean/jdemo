@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>JQuery</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="./js/jquery/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			 $(function(){
+			 		var page = {
+			 			hello: function($obj) {
+			 				alert($obj.text());
+			 			}
+			 		}
+			 		$("strong").wrap("<b></b>");
+			 		//会将所有<strong>包括其内容都移到页面上第一个<strong>标签处，并用<b>标签包裹
+			 		//$("strong").wrapAll("<b></b>");
+			 		//$(":header").css("background","#aaa");
+			 		$("#content").data("blah", page);  // blah设置为hello
+			 		$("h1").click(function(){
+			 				$("#content").data("blah").hello($(this));
+			 		});
+			 	});
+		</script>
+		<script type="text/css">
+			.focused {background: rgb(153, 153, 221);};
+			.de_exam {background: rgb(153, 153, 221);};
+		</script>
+	</head>
+	<body>
+		<strong>你最喜欢的水果是？</strong>
+		<ul>
+			<li>苹果</li>
+			<li><strong>香蕉</strong></li>
+			<li><b>梨子</b></li>
+		</ul>
+		<strong>你最不喜欢的水果是？</strong>
+		<p class="de_exam">
+			<b>事件委派delegate example</b>
+			<select tabIndex="3">        
+				<option>select menu</option>    
+			</select> 
+		</p>
+		<h1>Header 1</h1>
+		<p>Contents 1</p>
+		<h2>Header 2</h2>
+		<p>Contents 2</p>
+		<div id="content">    
+			<input tabIndex="1">    
+			<input tabIndex="2">    
+			<select tabIndex="3">        
+				<option>select menu</option>    
+			</select>    
+			<div tabIndex="4">        
+				a div    
+			</div>
+			<p>这是一个div里面的段落</p>
+			<button>请点击这里</button>
+		</div>
+		<div style="background-color:red">
+			<p>这是一个段落。</p>
+			<button>请点击这里</button>
+		</div>
+		<script type="text/javascript">
+			$(":header").css("background","#99d");
+			$("#content").delegate( "*", "focus blur", function( event ) {
+			    var elem = $( this );
+			    setTimeout(function() {
+			       elem.toggleClass( "focused");
+			    }, 0);
+			});
+			$("#content").delegate("button","click",function(){
+			  $("p").slideToggle();
+			});
+		</script>
+		<a href="ajaxframe.html">链接</>		
+	</body>
+</html>

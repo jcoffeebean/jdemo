@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+	<script type="text/javascript">
+		window.name = "域执行环境";
+		var person = {
+			name: "Noch",
+			age: 23,
+			job: "Devoloper",
+			sayName: function() {
+				
+				alert(this.name)
+			}
+			
+		};
+		//this指向函数据以执行的环境对象	
+		person.sayName()//this-->person
+	  var say = person.sayName;
+		say();//this-->window
+		
+		var book = {
+			_year: 2004,
+			year: 2005,
+			edition: 1
+		};
+		
+		//定义多个属性
+		Object.defineProperties(book, {
+				//数据属性
+				_year: {
+					value: 2004
+				},
+				//数据属性
+				edition: {
+					value: 1
+				},
+				//访问器属性
+				year: {
+					get: function() {
+						alert("get");
+						//return this.year;//alert(book.year)会导致无限递归调用
+						return this._year;
+					},
+					set: function(newVal){
+						alert("set");
+						if(newVal>2004) {
+							this._year = newVal + 2;
+							this.edition += newVal-2004;
+						}
+					}					
+				}
+
+			});
+		book.year = 2005; //执行访问器属性的set方法
+		//alert(book._year);
+		alert(book.year);//执行访问器属性的get方法
+		
+		var desc = Object.getOwnPropertyDescriptor(book,"_year");
+		alert("desc.value="+desc.value);
+	</script>
+	</head>
+	
+	<body>
+		
+	</body>
+</html>
+	

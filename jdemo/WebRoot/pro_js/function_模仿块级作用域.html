@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+	// 函数声明
+	function outputNum(count){
+		for(var i=0; i < count; i++){
+			alert("for: "+i);
+		}
+		var i; // 重新声明变量
+		alert("output: "+i); //上面的声明被忽视，不会改变其值
+	}
+	outputNum(2);
+	
+	// 函数表达式
+	var m = function(){
+		var i = 80;
+		return i;
+	}();
+	alert("m="+m);
+	
+	//模仿块级作用域-私有作用域
+	function outputNum2(count){
+		(function(){
+			for(var i=0; i < count; i++){
+				alert("for-outputNum2: "+i);
+			}				
+		})();
+		alert("output2: "+i); // Error
+	}
+	outputNum2(2);
+</script>

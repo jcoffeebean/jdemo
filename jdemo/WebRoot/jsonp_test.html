@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-Type" content="text/html;charset=utf-8"/>
+		<script type="text/javascript" src="./js/jquery/jquery.min.js"></script>
+		<script src="http://localhost:8080/jdemo/resource/js/base.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			//同源策略限制，浏览器阻止跨域访问资源，交叉源的请求是不允许的
+			/*
+				$.get('http://localhost:8080/jdemo/resource/js/base.js',function(data){
+							alert(1);
+				});
+				
+				
+				$.get('http://localhost:8080/jdemo/service/999',function(data){
+							alert(data);
+				});
+				*/
+				
+				$(document).ready(function(){
+						
+						//cllBack({"id":"456"});
+						
+						//JSONP的基础：利用script的跨域能力
+						//加载完后，会立即把响应当js去执行
+						$("<script><//script>").attr("src", 'http://localhost:8080/jdemo/resource/js/base.js').appendTo("body")
+						
+						$("<script><//script>").attr("src", 'http://localhost:8080/jdemo/jsonp/888_1').appendTo("body");
+						$("<script><//script>").attr("src", 'http://localhost:8080/jdemo/jsonp/888_2?callback=cllBack').appendTo("body");
+						
+						$("<script><//script>").attr("src", 'http://localhost:8080/jdemo/jsonp/666?callback=jsonpcallback').appendTo("body");
+						
+						
+						$.getScript('http://localhost:8080/jdemo/jsonp/999999?callback=jsonpcallback', function(){
+								alert(1);
+						});
+						
+						$.getScript('http://localhost:8080/jdemo/jsonp2/1989?callback=hello', function(){
+								//alert(1);
+						});						
+						$("<script><//script>").attr("src", 'http://localhost:8080/jdemo/jsonp2/2014?callback=hi').appendTo("body");
+				});
+				
+				function cllBack(json) {
+					alert(json['id']);
+				}
+				
+				function jsonpcallback(json) {
+					var con = $('#d1').html();
+					$('#d1').html(con + ' - ' +json['id']);
+				}
+		</script>
+	</head>
+	<body>
+		<div id="d1">
+		</div>
+	</body>
+</html>

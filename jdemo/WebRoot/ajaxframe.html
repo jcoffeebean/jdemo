@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+		<title>测试表单提交-Ajax刷新页面</title>
+  </head>
+  <body>
+  	<form id="form" method="post" action="append.html" target="ajaxfrm">
+  		<lable>姓名：<input type="text" name="xm" value="陶巍" />
+  		<label>性别：
+			<select name="xb">
+				<option value="1" selected="selected">男</option>
+				<option value="0">女</option>
+			</select>
+			<input type="submit" value="提交表单"/>
+  	</form>
+  	<div id="">
+  				<iframe name="ajaxfrm" frameborder="0" src=""></iframe>
+  	</div>
+  	<form id="form" method="post" action="ajaxframe.html" target="ajaxfrm2">
+  		<lable>姓名：<input type="text" name="xm" value="陶巍" />
+  		<label>性别：
+			<select name="xb">
+				<option value="1" selected="selected">男</option>
+				<option value="0">女</option>
+			</select>
+			<input type="submit" value="提交表单"/>
+  	</form>
+  	<div id="">
+  				<iframe name="ajaxfrm2" border="1"></iframe>
+  	</div>  	
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+	//设置超时调用，单位毫秒
+	var timeoutId = window.setTimeout(function(){
+			alert("Hi!");
+	},2000);
+	alert(timeoutId);
+	
+	//取消超时调用
+	//clearTimeout(timeoutId);
+	
+	//间歇调用
+	var max = 10;
+	var i = 0;
+	var intervalId = setInterval(function(){
+		i++;
+		alert("i="+i);
+		if(i == max){
+				clearInterval(intervalId);
+		}	
+	},100);
+</script>

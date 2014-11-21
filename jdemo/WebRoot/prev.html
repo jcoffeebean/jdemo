@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+	<head>
+	<script type="text/javascript" src="./js/jquery/jquery.min.js"></script>
+	<script type="text/javascript">
+			$(function(){
+				//Í¬±²ÔªËØ
+					alert($('div').prev().html());
+					alert('length = ' + $('div').prev().prev().length);
+					alert('index = ' + $('div').prev().prev().index());
+			});
+	</script>
+	</head>
+	<body>
+		<p>Hello</p>
+		<div>
+			<span>Hello Again</span>
+		</div>
+		<p>And Again</p>
+		
+	</body>
+</html>

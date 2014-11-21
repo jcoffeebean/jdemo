@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>siblings获取同辈元素</title>	
+		<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
+	</head>
+	<meta http-equiv="content-Type" content="text/html;charset=utf-8"/>
+	<body>
+					<table class="table-condensed table-striped">
+   					<tbody>
+   						<input type="hidden" name="tdmc" value="${item.TDMC}">
+   						<input type="hidden" name="indNum" value="${item.INDNUM}">
+   						<tr>
+   							<td class="t2">
+   								<a name="${item.TDID}" id="${item.TDID}"><c:out value="${item.TDMC}"/></a>
+   							</td>
+   							<td class="bind">
+   							 	通道别名：
+   							</td>
+   							<td class="t3">
+   								<input class="azwz" type="text" name="azwz" value="${item.AZWZ}">
+   							</td>
+   							<td class="sfytt">
+   								<label for="sb_${index}_${item.INDNUM}">
+   								<input type="hidden" name="sfytt" value="${item.SFYTT}">
+   								<input id="sb_0_1" type="checkbox" class="sfytt" checked="checked"}>已接入探头?
+   								<input type="hidden" name="sfytt1" value="${item.SFYTT}">
+   								<input type="hidden" name="sfytt2" value="${item.SFYTT}">
+   								<input type="hidden" name="sfytt" value="${item.SFYTT}">
+   								</label>
+   							</td>
+   							<td class="t4">
+				     			<button type="button" class="btn btn-link">
+					     			<span class="icon-exclamation-sign"></span>
+					     			<span class="color-red">无视频信号</span>
+				     			</button>		    							
+   							</td>
+   						</tr>
+    						<tr>
+   							<td class="t2">
+   								<a name="${item.TDID}" id="${item.TDID}"><c:out value="${item.TDMC}"/></a>
+   							</td>
+   							<td class="bind">
+   							 	通道别名：
+   							</td>
+   							<td class="t3">
+   								<input class="azwz" type="text" name="azwz" value="${item.AZWZ}">
+   							</td>
+   							<td class="sfytt">
+   								<label for="sb_${index}_${item.INDNUM}">
+   								<input type="hidden" name="sfytt" value="${item.SFYTT}">
+   								<input id="sb_0_2" type="checkbox" class="sfytt" checked="checked"}>已接入探头?
+   								</label>
+   							</td>
+   							<td class="t4">
+				     			<button type="button" class="btn btn-link">
+					     			<span class="icon-exclamation-sign"></span>
+					     			<span class="color-red">无视频信号</span>
+				     			</button>		    							
+   							</td>
+   						</tr>  						
+   					</tbody>
+   				</table>
+			   	<script type="text/javascript">
+					$('table').find(':checkbox[class="sfytt"]').on('change', function(){
+						//当前元素的同辈元素
+						alert($(this).siblings(':input[name="sfytt"]').length);
+						alert($(this).siblings().length);
+						$(this).siblings(':input[name="sfytt"]').val(this.checked?'1':'0');
+					});
+			   	</script>   				
+   			</body>
+</html>
