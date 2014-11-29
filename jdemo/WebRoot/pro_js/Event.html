@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>事件</title>
+</head>
+
+<body>
+<p> 1.HTML事件处理程序 </p>
+<form>
+  <input type="text" name="username" value="001"/>
+  <input type="button" onclick="alert(username.value)" value="click"/>
+</form>
+<p> 2.DOM0级事件处理程序:<br>
+  使用DOM0级方法指定的事件处理程序被认为是元素的方法。因此，这时候的事件处理程序是在
+  元素的作用域中运行；换句话说，程序中的this引用当前元素 </p>
+<form>
+  <input type="text" name="username" value="001"/>
+  <input type="button" id="myBtn" value="click"/>
+</form>
+<p> 3.DOM2级事件处理程序
+<ul>
+  <li> addEventListener和removeEventListener：3个参数：事件名、事件处理函数、布尔值（false-冒泡阶段处理、true-捕获阶段处理） </li>
+  <li> 顺序添加多个事件，将依次执行 </li>
+</ul>
+</p>
+<form>
+  <input type="text" name="username" value="DOM2"/>
+  <input type="button" id="myBtn2" value="click"/>
+</form>
+<p> 4.跨浏览器的事件处理程序 </p>
+<script type="text/javascript">
+	var btn = document.getElementById("myBtn2");
+	var handler1 =  function(){
+		alert(this.id)
+	};
+	var handler2 =  function(){
+		alert(this.id)
+	};
+	btn.addEventListener('click', handler1,false);
+	
+	btn.addEventListener('click', handler2,false);
+	btn.removeEventListener('click', handler2,false);
+	
+	//
+	var EventUtil = { 
+		addHandler: function(element, type, handler){ 
+			if (element.addEventListener){ 
+				element.addEventListener(type, handler, false); 
+			} else if (element.attachEvent){ 
+				element.attachEvent("on" + type, handler); 
+			} else { 
+				element["on" + type] = handler; 
+			} 
+		}, 
+		removeHandler: function(element, type, handler){ 
+			if (element.removeEventListener){ 
+				element.removeEventListener(type, handler, false); 
+			} else if (element.detachEvent){ 
+				element.detachEvent("on" + type, handler); 
+			} else { 
+				element["on" + type] = null; 
+			} 
+		} 
+	}; 		
+	</script>
+</body>
+</html>

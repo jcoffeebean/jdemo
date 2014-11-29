@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>JSON对象序列化和反序列化</title>
+
+</head>
+
+<body>
+
+
+
+<script type="text/javascript" src="../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+	var book1 = { 
+			title: "Professional JavaScript", 
+			authors: [ 
+			"Nicholas C. Zakas" 
+			], 
+			edition: 3, 
+			year: 2011 
+	}; 
+	var book2 = { 
+			title: "Professional JavaScript", 
+			authors: [ 
+			"Nicholas C. Zakas" 
+			], 
+			edition: 5, 
+			year: 2014,
+			test: {
+				t1: {
+					t11: "nested object",
+					attr1: 0
+				},
+				t2: {
+					t21: "nested object"
+				}
+			}
+	}; 
+	var book3 = { 
+			title: "Professional JavaScript", 
+			authors: [ 
+			"Nicholas C. Zakas" 
+			], 
+			edition: 5, 
+			year: 2014,
+			test: {
+				t1: {
+					t11: "nested object",
+					attr1: 0,
+					toJSON: function(){
+						return this.t11 +"," + this.attr1;
+					}
+				},
+				t2: {
+					t21: "nested object"
+				},
+				toJSON: function(){
+					return this.t1.toJSON() + "," + this.t2;
+				}
+			}
+	}; 	
+	var jsonText = JSON.stringify(book1);
+	//alert(jsonText);
+	jsonText = JSON.stringify(book1, ['title',"year",'authors'], 4);
+	alert(jsonText);
+	jsonText = JSON.stringify(book2, ['title',"year",'test'], 4);
+	alert(jsonText);
+	jsonText = JSON.stringify(book3, ['title',"year",'test'], 4);
+	alert(jsonText);
+</script>
+
+</body>
+</html>
+
