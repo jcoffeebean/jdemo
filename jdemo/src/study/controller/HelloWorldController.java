@@ -99,7 +99,7 @@ public class HelloWorldController {
 	}
 	
 	@RequestMapping(value="/jsonp/{id}")
-	public @ResponseBody String jsonpService(@PathVariable String id, String callback) { //@ResponseBody 表示服务返回json格式的数据
+	public @ResponseBody String jsonpService(@PathVariable String id, String callback, String postData) { //@ResponseBody 表示服务返回json格式的数据
 		StringBuffer sb = new StringBuffer(callback != null ? callback : "cllBack").append("(");
 		if (id != null) {
 			//你的业务逻辑处理

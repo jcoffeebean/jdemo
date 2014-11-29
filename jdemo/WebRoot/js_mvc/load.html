@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyHtml.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+  </head>
+  
+  <body>
+    This is my HTML page. <br>
+    <div id="loadHtml">8888</div>
+    <div id="loadHtml2"></div>
+    <div id="loadHtml3"></div>
+    
+    <script type="text/javascript">
+// 		var sur = ("WebSocket" in window);
+// 		if(sur) {
+// 			alert("WebSocket is surpported!");
+// 		} 
+		
+//		alert($('#loadHtml').attr('id'));
+		
+// 		$('#loadHtml').load('MyJsp.jsp?xb=0',{xm: 'taowei'}, function(data){//POST请求
+// 		});
+
+// 		$('#loadHtml').load('load2.html?xm=www', function(data){//GET请求
+// 		});
+		
+		
+// 		setTimeout(function(){//注意相对路径问题
+// 			$('#loadHtml2').load('./js_mvc/load2.html?xm=www #content',{flag: 1}, function(data){//POST请求
+// 			});
+// 		},5000);
+		
+		$('#loadHtml2').load('load2.html?xm=www #content',{name: 'json'}, function(data){//POST请求
+		});
+		
+		$('#loadHtml3').load('load2.html?xm=www',{name: 'json'}, function(data){//POST请求
+		});
+
+		
+    </script>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<script type="text/javascript" src="./js/jquery/jquery.min.js"></script>
@@ -30,7 +30,7 @@
 				</div>				
 			</div>
 			<div id="footer">
-				åº•éƒ¨&gt;&gt;
+				µ×²¿&gt;&gt;
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -54,16 +54,17 @@
 				});
 				$("#cen").append($html);
 			}
-			//å°†å‡½æ•°æ”¾åˆ°å…¨å±€windowå¯¹è±¡ä¸­
+			//½«º¯Êı·Åµ½È«¾Öwindow¶ÔÏóÖĞ
 			window['_loadU'] = loadU;
 			
 			function logIframeOnload() {
 				alert("iframe is loaded!");
 				//var form = document.getElementById("frm_log").contentWindow.document.getElementById("listForm");
 				var form = $("#frm_log")[0].contentWindow.document.getElementById("list_form");
-				form.c_name.value= "é™¶å·";
+				form.c_name.value= "ÌÕÎ¡";
 				form.sjh.value = "18682007754";
-				form.bz.value = "å½“iframeåŠ è½½å®Œæ¯•åç»™iframeä¸­çš„è¡¨å•åŸŸèµ‹å€¼ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚";
+				form.bz.value = "µ±iframe¼ÓÔØÍê±Ïºó¸øiframeÖĞµÄ±íµ¥Óò¸³Öµ¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£";
+				window.top.frames[0].contentWindow.document.getElementById("list_form")['json'] = "json-008";
 			}
 		</script>
 	</body>

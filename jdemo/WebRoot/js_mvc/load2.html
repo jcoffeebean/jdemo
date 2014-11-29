@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyHtml2.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <form action="">
+    	<label>姓名：</label><input type="text" name="xm" value="TW">
+    	<label>DESC：</label><textarea cols="100" rows="2" name="desc"></textarea>
+    	<input type="hidden" name="xb">
+    </form>
+    <script type="text/javascript">
+  	var document_url = document.location.href;
+  	var window_url = window.location.href;
+  	alert(window_url);
+  	alert(window_url === document_url);
+  	alert(document_url.indexOf('?'));
+  	document.forms[0]['desc'].value = document_url.substring(document_url.indexOf('?'));
+    </script>
+    <div id="content">
+    	<form>
+	    	<label>机构</label><input name="qy" type="text" value="福田区"/>
+    	</form>
+	    <script type="text/javascript">
+	  	var document_url = document.location.href;
+	  	setTimeout(function(){
+		  	document.forms[1]['qy'].value = '罗湖';
+	  	},5000);
+	    </script>
+    </div>
+  </body>
+</html>
