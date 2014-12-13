@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>事件</title>
+<title>事件处理程序</title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
 <script type="text/javascript">
 	var btn = document.getElementById("myBtn2");
 	var handler1 =  function(){
-		alert(this.id)
+		alert(this.id + ' 事件对象->事件类型->' + event.type)
 	};
 	var handler2 =  function(){
 		alert(this.id)
@@ -40,9 +40,9 @@
 	btn.addEventListener('click', handler1,false);
 	
 	btn.addEventListener('click', handler2,false);
-	btn.removeEventListener('click', handler2,false);
+	//btn.removeEventListener('click', handler2,false);
 	
-	//
+	//跨浏览器的事件处理程序
 	var EventUtil = { 
 		addHandler: function(element, type, handler){ 
 			if (element.addEventListener){ 

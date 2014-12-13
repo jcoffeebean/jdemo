@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>事件对象</title>
+
+</head>
+
+<body>
+<p>
+888
+</p>
+<script type="text/javascript">
+		//跨浏览器的事件处理程序
+	var EventUtil = { 
+		addHandler: function(element, type, handler){ 
+			if (element.addEventListener){ 
+				element.addEventListener(type, handler, false); 
+			} else if (element.attachEvent){ 
+				element.attachEvent("on" + type, handler); 
+			} else { 
+				element["on" + type] = handler; 
+			} 
+		}, 
+		removeHandler: function(element, type, handler){ 
+			if (element.removeEventListener){ 
+				element.removeEventListener(type, handler, false); 
+			} else if (element.detachEvent){ 
+				element.detachEvent("on" + type, handler); 
+			} else { 
+				element["on" + type] = null; 
+			} 
+		} 
+	}; 
+	alert(1)
+</script>
+</body>
+</html>
