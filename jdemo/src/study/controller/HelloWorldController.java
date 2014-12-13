@@ -32,7 +32,7 @@ import study.entity.QQ;
  * 
  * @author taowei20061122@163.com 2013-10-13
  */
-@Controller  //或者 @RequestMapping   //1.将一个普通的POJO类声明为处理器
+@Controller  //或者 @RequestMapping    //1.将一个普通的POJO类声明为处理器
 public class HelloWorldController {
 	
 	public static Log logger = LogFactory.getLog(HelloWorldController.class);
